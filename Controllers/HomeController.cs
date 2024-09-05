@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
-using TodoTask.Models;
+using TodoTask.Web.Models;
 
-namespace TodoTask.Controllers
+namespace TodoTask.Web.Controllers
 {
     public class HomeController : Controller
     {

@@ -11,17 +11,17 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["TodoTask.csproj", "."]
-RUN dotnet restore "./TodoTask.csproj"
+COPY ["TodoTask.Web.csproj", "."]
+RUN dotnet restore "./TodoTask.Web.csproj"
 COPY . .
 WORKDIR "/src/."
-RUN dotnet build "./TodoTask.csproj" -c %BUILD_CONFIGURATION% -o /app/build
+RUN dotnet build "./TodoTask.Web.csproj" -c %BUILD_CONFIGURATION% -o /app/build
 
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./TodoTask.csproj" -c %BUILD_CONFIGURATION% -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "./TodoTask.Web.csproj" -c %BUILD_CONFIGURATION% -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "TodoTask.dll"]
+ENTRYPOINT ["dotnet", "TodoTask.Web.dll"]

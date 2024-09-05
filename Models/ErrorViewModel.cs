@@ -1,4 +1,4 @@
-namespace TodoTask.Models
+namespace TodoTask.Web.Models
 {
     public class ErrorViewModel
     {
